@@ -1,0 +1,13 @@
+{
+	"name": "SalesforceSourceDataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "MySalesforce",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SalesforceObject",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
