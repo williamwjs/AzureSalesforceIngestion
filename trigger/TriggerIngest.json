@@ -1,0 +1,24 @@
+{
+	"name": "TriggerIngest",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "sfdcIngest",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Hour",
+				"interval": 24,
+				"startTime": "2021-04-01T03:37:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}
