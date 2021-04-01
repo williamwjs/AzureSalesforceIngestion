@@ -6,7 +6,7 @@
 		"typeProperties": {
 			"url": "https://jiawang2-dev-ed.my.salesforce.com/services/data/v49.0/sobjects/contact/describe",
 			"enableServerCertificateValidation": true,
-			"authenticationType": "Basic",
+			"authenticationType": "Digest",
 			"userName": "wangtest2@test.linkedin.com",
 			"password": {
 				"type": "AzureKeyVaultSecret",
