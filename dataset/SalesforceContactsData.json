@@ -1,0 +1,21 @@
+{
+	"name": "SalesforceContactsData",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Salesforce data",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "data",
+				"folderPath": "contacts",
+				"container": "salesforce"
+			}
+		},
+		"schema": {}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
