@@ -4,9 +4,18 @@
 		"annotations": [],
 		"type": "HttpServer",
 		"typeProperties": {
-			"url": "http://www.dneonline.com/calculator.asmx",
-			"enableServerCertificateValidation": false,
-			"authenticationType": "Anonymous"
+			"url": "https://jiawang2-dev-ed.my.salesforce.com/services/data/v49.0/sobjects/contact/describe",
+			"enableServerCertificateValidation": true,
+			"authenticationType": "Basic",
+			"userName": "wangtest2@test.linkedin.com",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault1",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "sfdcPassword"
+			}
 		}
 	}
 }
