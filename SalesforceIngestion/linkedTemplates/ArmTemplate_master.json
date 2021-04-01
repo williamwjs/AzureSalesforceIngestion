@@ -1,0 +1,70 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "SalesforceIngestion"
+		},
+		"Salesforce data_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'Salesforce data'"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://jiawangKeyVault.vault.azure.net/"
+		},
+		"MySalesforce_properties_typeProperties_environmentUrl": {
+			"type": "string",
+			"defaultValue": "https://login.salesforce.com"
+		},
+		"MySalesforce_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "wangtest2@test.linkedin.com"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "SalesforceIngestion_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"Salesforce data_connectionString": {
+						"value": "[parameters('Salesforce data_connectionString')]"
+					},
+					"AzureKeyVault1_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
+					},
+					"MySalesforce_properties_typeProperties_environmentUrl": {
+						"value": "[parameters('MySalesforce_properties_typeProperties_environmentUrl')]"
+					},
+					"MySalesforce_properties_typeProperties_username": {
+						"value": "[parameters('MySalesforce_properties_typeProperties_username')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
