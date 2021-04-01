@@ -302,8 +302,11 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "opportunityStages",
-						"folderPath": "picklist",
+						"fileName": {
+							"value": "@utcnow()",
+							"type": "Expression"
+						},
+						"folderPath": "opportunityStages",
 						"container": "salesforce"
 					}
 				},
@@ -327,7 +330,10 @@
 				"typeProperties": {
 					"location": {
 						"type": "AzureBlobStorageLocation",
-						"fileName": "data",
+						"fileName": {
+							"value": "@utcnow()",
+							"type": "Expression"
+						},
 						"folderPath": "contacts",
 						"container": "salesforce"
 					}
