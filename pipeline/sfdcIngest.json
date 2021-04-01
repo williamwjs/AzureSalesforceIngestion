@@ -17,7 +17,7 @@
 				"userProperties": [
 					{
 						"name": "Destination",
-						"value": "salesforce//contacts"
+						"value": "salesforce/contacts"
 					}
 				],
 				"typeProperties": {
@@ -79,6 +79,92 @@
 								},
 								"sink": {
 									"path": "$['Title']"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_ig3",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_ig3",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Ingest_Salesforce_OpportunityStages",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Destination",
+						"value": "salesforce/opportunityStages"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "SalesforceSource",
+						"query": "SELECT Value,Label FROM PicklistValueInfo WHERE EntityParticleId = 'Opportunity.StageName' AND IsActive=true ORDER BY Value DESC",
+						"readBehavior": "query"
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings",
+							"filePattern": "setOfObjects"
+						}
+					},
+					"enableStaging": false,
+					"validateDataConsistency": true,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Warning",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "Salesforce data",
+								"type": "LinkedServiceReference"
+							},
+							"path": "salesforce/opportunitystages"
+						}
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Value",
+									"type": "String"
+								},
+								"sink": {
+									"path": "$['Value']"
+								}
+							},
+							{
+								"source": {
+									"name": "Label",
+									"type": "String"
+								},
+								"sink": {
+									"path": "$['Label']"
 								}
 							}
 						]
