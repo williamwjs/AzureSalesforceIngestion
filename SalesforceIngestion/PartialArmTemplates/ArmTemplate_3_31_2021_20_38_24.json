@@ -6,22 +6,6 @@
 			"type": "string",
 			"metadata": "Data Factory name",
 			"defaultValue": "SalesforceIngestion"
-		},
-		"Salesforce data_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'Salesforce data'"
-		},
-		"AzureKeyVault1_properties_typeProperties_baseUrl": {
-			"type": "string",
-			"defaultValue": "https://jiawangKeyVault.vault.azure.net/"
-		},
-		"MySalesforce_properties_typeProperties_environmentUrl": {
-			"type": "string",
-			"defaultValue": "https://login.salesforce.com"
-		},
-		"MySalesforce_properties_typeProperties_username": {
-			"type": "string",
-			"defaultValue": "wangtest2@test.linkedin.com"
 		}
 	},
 	"variables": {
@@ -119,15 +103,13 @@
 						"inputs": [
 							{
 								"referenceName": "SalesforceSourceDataset",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "SalesforceContactsData",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					},
@@ -207,15 +189,13 @@
 						"inputs": [
 							{
 								"referenceName": "SalesforceSourceDataset",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						],
 						"outputs": [
 							{
 								"referenceName": "SalesforceOpportunityStagesData",
-								"type": "DatasetReference",
-								"parameters": {}
+								"type": "DatasetReference"
 							}
 						]
 					}
@@ -226,67 +206,8 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/SalesforceSourceDataset')]",
 				"[concat(variables('factoryId'), '/datasets/SalesforceContactsData')]",
-				"[concat(variables('factoryId'), '/datasets/SalesforceOpportunityStagesData')]",
-				"[concat(variables('factoryId'), '/linkedServices/Salesforce data')]"
+				"[concat(variables('factoryId'), '/datasets/SalesforceOpportunityStagesData')]"
 			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureKeyVault1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureKeyVault",
-				"typeProperties": {
-					"baseUrl": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/MySalesforce')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "Salesforce",
-				"typeProperties": {
-					"environmentUrl": "[parameters('MySalesforce_properties_typeProperties_environmentUrl')]",
-					"username": "[parameters('MySalesforce_properties_typeProperties_username')]",
-					"password": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "AzureKeyVault1",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "sfdcPassword"
-					},
-					"securityToken": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "AzureKeyVault1",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "sfdcSecurityToken"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureKeyVault1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Salesforce data')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('Salesforce data_connectionString')]"
-				}
-			},
-			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/SalesforceOpportunityStagesData')]",
@@ -309,9 +230,7 @@
 				},
 				"schema": {}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Salesforce data')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/SalesforceContactsData')]",
@@ -334,9 +253,7 @@
 				},
 				"schema": {}
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Salesforce data')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/SalesforceSourceDataset')]",
@@ -349,12 +266,9 @@
 				},
 				"annotations": [],
 				"type": "SalesforceObject",
-				"schema": [],
-				"typeProperties": {}
+				"schema": []
 			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/MySalesforce')]"
-			]
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/TriggerIngest')]",
@@ -368,8 +282,7 @@
 						"pipelineReference": {
 							"referenceName": "sfdcIngest",
 							"type": "PipelineReference"
-						},
-						"parameters": {}
+						}
 					}
 				],
 				"type": "ScheduleTrigger",

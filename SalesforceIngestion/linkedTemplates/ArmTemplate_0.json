@@ -55,31 +55,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DestinationDataset_ig3')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Salesforce data",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "data",
-						"folderPath": "contacts",
-						"container": "salesforce"
-					}
-				},
-				"schema": {}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Salesforce data')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/MySalesforce')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -112,7 +87,57 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/SourceDataset_ig3')]",
+			"name": "[concat(parameters('factoryName'), '/SalesforceOpportunityStagesData')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Salesforce data",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "opportunityStages",
+						"folderPath": "picklist",
+						"container": "salesforce"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Salesforce data')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SalesforceContactsData')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "Salesforce data",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Json",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "data",
+						"folderPath": "contacts",
+						"container": "salesforce"
+					}
+				},
+				"schema": {}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/Salesforce data')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SalesforceSourceDataset')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -219,14 +244,14 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "SourceDataset_ig3",
+								"referenceName": "SalesforceSourceDataset",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "DestinationDataset_ig3",
+								"referenceName": "SalesforceContactsData",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -278,7 +303,7 @@
 										"referenceName": "Salesforce data",
 										"type": "LinkedServiceReference"
 									},
-									"path": "salesforce/opportunitystages"
+									"path": ""
 								}
 							},
 							"translator": {
@@ -307,14 +332,14 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "SourceDataset_ig3",
+								"referenceName": "SalesforceSourceDataset",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "DestinationDataset_ig3",
+								"referenceName": "SalesforceOpportunityStagesData",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -325,9 +350,40 @@
 				"lastPublishTime": "2021-04-01T01:41:06Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/SourceDataset_ig3')]",
-				"[concat(variables('factoryId'), '/datasets/DestinationDataset_ig3')]",
+				"[concat(variables('factoryId'), '/datasets/SalesforceSourceDataset')]",
+				"[concat(variables('factoryId'), '/datasets/SalesforceContactsData')]",
+				"[concat(variables('factoryId'), '/datasets/SalesforceOpportunityStagesData')]",
 				"[concat(variables('factoryId'), '/linkedServices/Salesforce data')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/TriggerIngest')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "sfdcIngest",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Hour",
+						"interval": 24,
+						"startTime": "2021-04-01T03:37:00Z",
+						"timeZone": "UTC"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/sfdcIngest')]"
 			]
 		}
 	]
