@@ -86,7 +86,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SourceDataset_ig3",
+						"referenceName": "SalesforceSourceDataset",
 						"type": "DatasetReference"
 					}
 				],
@@ -172,7 +172,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "SourceDataset_ig3",
+						"referenceName": "SalesforceSourceDataset",
 						"type": "DatasetReference"
 					}
 				],
