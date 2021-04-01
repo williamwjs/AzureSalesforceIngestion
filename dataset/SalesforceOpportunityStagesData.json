@@ -1,5 +1,5 @@
 {
-	"name": "OpportunityStagesData",
+	"name": "SalesforceOpportunityStagesData",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "Salesforce data",
