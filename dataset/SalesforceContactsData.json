@@ -10,7 +10,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "data",
+				"fileName": {
+					"value": "data_@data_utcnow()",
+					"type": "Expression"
+				},
 				"folderPath": "contacts",
 				"container": "salesforce"
 			}
