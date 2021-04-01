@@ -1,0 +1,13 @@
+{
+	"name": "SourceDataset_ig3",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "MySalesforce",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SalesforceObject",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

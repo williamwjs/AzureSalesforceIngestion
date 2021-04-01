@@ -1,0 +1,9 @@
+{
+	"name": "SalesforceIngestion",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "ea9ae187-82a5-4be4-9e02-cbfc9ddfb55b",
+		"tenantId": "e4d34e04-63ce-4184-8910-c56c7093d007"
+	}
+}
