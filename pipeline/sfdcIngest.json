@@ -4,7 +4,7 @@
 		"description": "The task to ingest SFDC data",
 		"activities": [
 			{
-				"name": "Ingest_Salesforce",
+				"name": "Ingest_Salesforce_Contacts",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
