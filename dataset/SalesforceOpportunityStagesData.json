@@ -10,8 +10,11 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"fileName": "opportunityStages",
-				"folderPath": "picklist",
+				"fileName": {
+					"value": "@utcnow()",
+					"type": "Expression"
+				},
+				"folderPath": "opportunityStages",
 				"container": "salesforce"
 			}
 		},

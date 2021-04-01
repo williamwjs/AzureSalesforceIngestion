@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": {
-					"value": "data_@data_utcnow()",
+					"value": "@utcnow()",
 					"type": "Expression"
 				},
 				"folderPath": "contacts",
