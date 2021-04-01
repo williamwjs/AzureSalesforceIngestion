@@ -92,7 +92,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "DestinationDataset_ig3",
+						"referenceName": "SalesforceContactsData",
 						"type": "DatasetReference"
 					}
 				]
@@ -143,7 +143,7 @@
 								"referenceName": "Salesforce data",
 								"type": "LinkedServiceReference"
 							},
-							"path": "salesforce/opportunitystages"
+							"path": ""
 						}
 					},
 					"translator": {
@@ -178,7 +178,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "DestinationDataset_ig3",
+						"referenceName": "SalesforceOpportunityStagesData",
 						"type": "DatasetReference"
 					}
 				]
