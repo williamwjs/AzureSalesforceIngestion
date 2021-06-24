@@ -1,9 +1,0 @@
-{
-	"name": "AzureSalesforceIngestion",
-	"location": "westus",
-	"identity": {
-		"type": "SystemAssigned",
-		"principalId": "9a468357-ce42-42ef-936d-8738d5a97f4f",
-		"tenantId": "e4d34e04-63ce-4184-8910-c56c7093d007"
-	}
-}
