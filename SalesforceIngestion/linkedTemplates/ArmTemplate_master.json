@@ -13,7 +13,15 @@
 		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
 			"type": "string",
-			"defaultValue": "https://jiawangKeyVault.vault.azure.net/"
+			"defaultValue": "https://jiashuokeyvault.vault.azure.net/"
+		},
+		"HttpLinkedService_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://jiawang2-dev-ed.my.salesforce.com/services/data/v49.0/sobjects/contact/describe"
+		},
+		"HttpLinkedService_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "wangtest2@test.linkedin.com"
 		},
 		"MySalesforce_properties_typeProperties_environmentUrl": {
 			"type": "string",
@@ -55,6 +63,12 @@
 					},
 					"AzureKeyVault1_properties_typeProperties_baseUrl": {
 						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
+					},
+					"HttpLinkedService_properties_typeProperties_url": {
+						"value": "[parameters('HttpLinkedService_properties_typeProperties_url')]"
+					},
+					"HttpLinkedService_properties_typeProperties_userName": {
+						"value": "[parameters('HttpLinkedService_properties_typeProperties_userName')]"
 					},
 					"MySalesforce_properties_typeProperties_environmentUrl": {
 						"value": "[parameters('MySalesforce_properties_typeProperties_environmentUrl')]"

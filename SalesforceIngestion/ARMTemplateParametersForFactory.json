@@ -9,7 +9,13 @@
 			"value": ""
 		},
 		"AzureKeyVault1_properties_typeProperties_baseUrl": {
-			"value": "https://jiawangKeyVault.vault.azure.net/"
+			"value": "https://jiashuokeyvault.vault.azure.net/"
+		},
+		"HttpLinkedService_properties_typeProperties_url": {
+			"value": "https://jiawang2-dev-ed.my.salesforce.com/services/data/v49.0/sobjects/contact/describe"
+		},
+		"HttpLinkedService_properties_typeProperties_userName": {
+			"value": "wangtest2@test.linkedin.com"
 		},
 		"MySalesforce_properties_typeProperties_environmentUrl": {
 			"value": "https://login.salesforce.com"
